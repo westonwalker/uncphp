@@ -1,0 +1,38 @@
+/* ============================================================
+   unc-extend.css
+   Use this file to customize unc.css without modifying it.
+   Import this AFTER unc.css in your HTML.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   EXAMPLE: Override a design token
+   Change the primary color to your brand color.
+
+   :root {
+     --color-primary: #e11d48;
+   }
+   ------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------
+   EXAMPLE: Add a custom utility class
+   Built on existing tokens so it stays in sync with your theme.
+
+   .btn {
+     display: inline-flex;
+     align-items: center;
+     padding: var(--space-2) var(--space-4);
+     background-color: var(--color-primary);
+     color: #fff;
+     font-weight: var(--font-medium);
+     border-radius: var(--radius-md);
+     border: none;
+     cursor: pointer;
+     transition: opacity var(--transition-fast);
+   }
+
+   .btn:hover {
+     opacity: 0.85;
+   }
+   ------------------------------------------------------------ */

@@ -1,0 +1,4 @@
+CREATE TABLE schedule_runs (
+    name     VARCHAR(255) NOT NULL PRIMARY KEY,
+    last_run TIMESTAMP NULL DEFAULT NULL
+);

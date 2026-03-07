@@ -1,0 +1,22 @@
+Authentication - DONE
+Authorization
+Logging - DONE
+Cron jobs - DONE
+Request and response helpers - DONE
+Global error/exception handler - DONE
+
+  3. Validation — simple rule-based validation for form input. required, email, min, max, unique etc. One of Laravel's most used features by far.
+  4. Flash messages — one-time session messages for things like success, error, warning after form submissions or redirects. Pairs tightly with validation.
+  5. old() helper — repopulate form fields after a failed validation with the previously submitted value. Goes hand-in-hand with flash/validation.
+  7. dd() / dump() — die and dump for debugging. Trivial to add but used constantly.
+
+  Moderate value:
+
+  8. Config system — a config/ folder with plain PHP files returning arrays, and a config('app.name') helper. Cleaner than stuffing everything in .env.
+  9. Pagination — a simple helper that takes a total count and current page and returns page numbers, offsets, and limits. Very commonly needed.
+  10. Named routes — give routes a name and generate URLs with route('city.show', ['slug' => 'peoria-il']) instead of hardcoding paths everywhere.
+
+  Things I'd skip for now:
+  - Blade-like templating (plain PHP is fine for your goals)
+  - Service container / dependency injection (too abstract)
+  - Queues, auth scaffolding, rate limiting (too heavy)

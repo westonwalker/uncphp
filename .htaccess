@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Block direct access to sensitive files
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
+
+# Serve real files and directories directly (assets, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route everything else to index.php
+RewriteRule ^ index.php [QSA,L]
