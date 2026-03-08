@@ -207,6 +207,11 @@ php command.php schedule
 php command.php test
 ```
 
+## JavaScript
+
+- Shared JS (used across multiple pages) → `assets/js/app.js`
+- Page-specific JS → inline in the relevant `views/*.php` or `views/components/*.php` file
+
 ## Conventions
 
 - New routes → `routes.php`

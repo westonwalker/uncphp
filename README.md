@@ -1,4 +1,4 @@
-# funlocal
+# Unc PHP
 
 A simple PHP app. No framework, low abstraction.
 
@@ -11,6 +11,7 @@ A simple PHP app. No framework, low abstraction.
 ## Setup
 
 1. Copy `.env.example` to `.env` and fill in your database credentials:
+
     ```
     DB_HOST=localhost
     DB_NAME=your_database
@@ -19,6 +20,7 @@ A simple PHP app. No framework, low abstraction.
     ```
 
 2. Run migrations (this will create the database if it doesn't exist):
+
     ```bash
     php command.php migrate
     ```
@@ -95,8 +97,8 @@ $global_middleware = ['auth'];
 
 ```html
 <form method="POST" action="/subscribe">
-    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
-    ...
+	<input type="hidden" name="csrf_token" value="<?= csrf_token() ?>" />
+	...
 </form>
 ```
 
@@ -108,9 +110,9 @@ Middleware functions live in `middleware.php`. The string you pass in a route **
 
 Built-in middleware:
 
-| String | Function | Description |
-|---|---|---|
-| `'auth'` | `auth()` | Redirects to `/login` if the user is not logged in |
+| String   | Function | Description                                                |
+| -------- | -------- | ---------------------------------------------------------- |
+| `'auth'` | `auth()` | Redirects to `/login` if the user is not logged in         |
 | `'csrf'` | `csrf()` | Validates `$_POST['csrf_token']`, dies with 403 on failure |
 
 **Adding custom middleware:**
@@ -152,6 +154,7 @@ Views are plain PHP files. Include the header and footer components at the top a
 All three files are required on every request and their functions are available everywhere.
 
 **`actions.php`** — reusable helpers that do not touch the database:
+
 ```php
 function format_date(string $date): string {
     return date('F j, Y', strtotime($date));
@@ -159,6 +162,7 @@ function format_date(string $date): string {
 ```
 
 **`queries.php`** — database read functions (SELECT only):
+
 ```php
 function get_user(int $id): array|false {
     global $pdo;
@@ -174,6 +178,7 @@ function get_users(): array {
 ```
 
 **`mutations.php`** — database write functions (INSERT, UPDATE, DELETE):
+
 ```php
 function update_user_name(int $id, string $name): void {
     global $pdo;
@@ -199,11 +204,13 @@ migrations/
 ```
 
 **Run pending migrations:**
+
 ```bash
 php command.php migrate
 ```
 
 **Drop the database and re-run everything from scratch:**
+
 ```bash
 php command.php migrate --fresh
 ```
@@ -222,15 +229,15 @@ All CLI commands run through `command.php`:
 php command.php <command> [target] [--flags]
 ```
 
-| Command | Description |
-|---|---|
-| `php command.php migrate` | Run all pending migrations |
-| `php command.php migrate --fresh` | Drop the database and re-run all migrations |
-| `php command.php seed` | Run all seeders |
-| `php command.php seed <name>` | Run a single seeder by name |
-| `php command.php seed <name> --fresh` | Truncate the table then run the seeder |
-| `php command.php schedule` | Run all due scheduled tasks |
-| `php command.php test` | Run all tests against a temporary test database |
+| Command                               | Description                                     |
+| ------------------------------------- | ----------------------------------------------- |
+| `php command.php migrate`             | Run all pending migrations                      |
+| `php command.php migrate --fresh`     | Drop the database and re-run all migrations     |
+| `php command.php seed`                | Run all seeders                                 |
+| `php command.php seed <name>`         | Run a single seeder by name                     |
+| `php command.php seed <name> --fresh` | Truncate the table then run the seeder          |
+| `php command.php schedule`            | Run all due scheduled tasks                     |
+| `php command.php test`                | Run all tests against a temporary test database |
 
 **Adding a new command:**
 
@@ -267,18 +274,19 @@ return [
 
 **Cron expression syntax** (5 fields: minute, hour, day-of-month, month, day-of-week):
 
-| Expression | Description |
-|---|---|
-| `* * * * *` | Every minute |
-| `0 * * * *` | Every hour |
-| `0 9 * * *` | Daily at 9am |
-| `0 9 * * 1` | Every Monday at 9am |
-| `*/15 * * * *` | Every 15 minutes |
+| Expression       | Description                |
+| ---------------- | -------------------------- |
+| `* * * * *`      | Every minute               |
+| `0 * * * *`      | Every hour                 |
+| `0 9 * * *`      | Daily at 9am               |
+| `0 9 * * 1`      | Every Monday at 9am        |
+| `*/15 * * * *`   | Every 15 minutes           |
 | `0 9,17 * * 1-5` | 9am and 5pm, weekdays only |
 
 Supports `*`, `*/n`, `n-m`, `n,m`, and `n-m/step` in all five fields.
 
 **Server setup** — add one crontab entry that runs every minute:
+
 ```
 * * * * * php /path/to/command.php schedule
 ```
@@ -291,10 +299,10 @@ The `schedule_runs` table tracks the last time each task ran, preventing double-
 
 Errors and unhandled exceptions are caught globally by `core/errors.php`, which is loaded first in `index.php`. Set `APP_ENV` in `.env` to control the behaviour:
 
-| `APP_ENV` | Behaviour |
-|---|---|
-| `local` | Full error page — exception class, message, file, line, and stack trace |
-| `production` | Clean `views/errors/500.php` page shown to the user |
+| `APP_ENV`    | Behaviour                                                               |
+| ------------ | ----------------------------------------------------------------------- |
+| `local`      | Full error page — exception class, message, file, line, and stack trace |
+| `production` | Clean `views/errors/500.php` page shown to the user                     |
 
 Errors are always logged via `log_error()` regardless of environment.
 
@@ -307,6 +315,7 @@ All the details you need — exception type, message, location, and a full stack
 Edit `views/errors/500.php` to match your app's design. It uses the standard header/footer components.
 
 **`APP_ENV` in `.env`:**
+
 ```
 APP_ENV=local      # development
 APP_ENV=production # live server
@@ -381,12 +390,14 @@ abort(403, 'Forbidden');         // with message
 Auth functions live in `core/auth.php` and are available everywhere.
 
 **Registering a user:**
+
 ```php
 $success = register('Jane Doe', 'jane@example.com', 'password');
 // Returns false if the email is already taken
 ```
 
 **Logging in:**
+
 ```php
 $success = login($email, $password);
 // Returns false on invalid credentials
@@ -400,6 +411,7 @@ exit;
 ```
 
 **Logging out:**
+
 ```php
 logout(); // deletes the DB session and destroys $_SESSION
 header('Location: /login');
@@ -407,17 +419,20 @@ exit;
 ```
 
 **Getting the current user:**
+
 ```php
 $user = current_user(); // returns user array or null
 echo $user['name'];
 ```
 
 **Checking login status:**
+
 ```php
 if (is_logged_in()) { ... }
 ```
 
 **Protecting routes** — add the `auth` middleware to any route in `routes.php`:
+
 ```php
 get('/dashboard', 'views/dashboard.php', ['auth']);
 ```
@@ -456,6 +471,7 @@ php command.php test
 ```
 
 The test runner:
+
 1. Creates a fresh MySQL database (`DB_TEST_NAME` from `.env`)
 2. Runs all migrations against it
 3. Loads `actions.php`, `queries.php`, `mutations.php`
@@ -465,6 +481,7 @@ The test runner:
 Each test gets `$pdo` pointing at the test database. Tests are isolated — insert your own fixture data inline.
 
 **Writing tests:**
+
 ```php
 // tests/users_test.php
 
@@ -481,18 +498,19 @@ test('can insert and fetch a user', function ($pdo) {
 
 **Assertion helpers:**
 
-| Helper | Description |
-|---|---|
-| `assert_true($condition, $msg)` | Fails if false |
-| `assert_false($condition, $msg)` | Fails if true |
-| `assert_equals($expected, $actual, $msg)` | Strict equality |
-| `assert_not_null($value, $msg)` | Fails if null |
-| `assert_null($value, $msg)` | Fails if not null |
-| `assert_count($expected, $array, $msg)` | Checks array length |
+| Helper                                    | Description         |
+| ----------------------------------------- | ------------------- |
+| `assert_true($condition, $msg)`           | Fails if false      |
+| `assert_false($condition, $msg)`          | Fails if true       |
+| `assert_equals($expected, $actual, $msg)` | Strict equality     |
+| `assert_not_null($value, $msg)`           | Fails if null       |
+| `assert_null($value, $msg)`               | Fails if not null   |
+| `assert_count($expected, $array, $msg)`   | Checks array length |
 
 If any test fails, the command exits with code `1` — suitable for CI pipelines.
 
 **`DB_TEST_NAME` in `.env`:**
+
 ```
 DB_TEST_NAME=funlocal_test
 ```
