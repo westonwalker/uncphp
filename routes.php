@@ -15,3 +15,12 @@ $global_middleware = [];
 // Access them in views with param('name').
 
 get('/', 'views/home.php');
+post('/search', 'views/search_results.php');
+
+get('/posts/create', 'views/posts/create.php');
+post('/posts/create', 'views/posts/create.php');
+
+get('/posts/{slug}', 'views/posts/show.php');
+
+get('/posts/{slug}/edit', 'views/posts/edit.php');
+post('/posts/{slug}/edit', 'views/posts/edit.php');

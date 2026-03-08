@@ -16,3 +16,20 @@
 //     global $pdo;
 //     $pdo->prepare('DELETE FROM cities WHERE id = ?')->execute([$id]);
 // }
+
+function create_post(string $title, string $slug, string $body): int {
+    global $pdo;
+    $stmt = $pdo->prepare('INSERT INTO posts (title, slug, body) VALUES (?, ?, ?)');
+    $stmt->execute([$title, $slug, $body]);
+    return (int) $pdo->lastInsertId();
+}
+
+function update_post(int $id, string $title, string $body): void {
+    global $pdo;
+    $pdo->prepare('UPDATE posts SET title = ?, body = ? WHERE id = ?')->execute([$title, $body, $id]);
+}
+
+function delete_post(int $id): void {
+    global $pdo;
+    $pdo->prepare('DELETE FROM posts WHERE id = ?')->execute([$id]);
+}

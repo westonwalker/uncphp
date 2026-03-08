@@ -207,6 +207,14 @@ php command.php schedule
 php command.php test
 ```
 
+## CSS
+
+- `assets/css/unc.css` — utility class library (do not edit)
+- `assets/css/unc-extend.css` — add all custom classes and token overrides here
+- Both are imported via `assets/css/app.css`
+
+Use `unc.css` utility classes directly in HTML. Add any custom component classes to `unc-extend.css`.
+
 ## JavaScript
 
 - Shared JS (used across multiple pages) → `assets/js/app.js`

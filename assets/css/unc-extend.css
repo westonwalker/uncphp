@@ -6,33 +6,190 @@
 
 
 /* ------------------------------------------------------------
-   EXAMPLE: Override a design token
-   Change the primary color to your brand color.
-
-   :root {
-     --color-primary: #e11d48;
-   }
+   LAYOUT
    ------------------------------------------------------------ */
+
+.page {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.page-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  margin: 0;
+}
+
+.page-title-standalone {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  margin: 0 0 var(--space-6);
+}
 
 
 /* ------------------------------------------------------------
-   EXAMPLE: Add a custom utility class
-   Built on existing tokens so it stays in sync with your theme.
-
-   .btn {
-     display: inline-flex;
-     align-items: center;
-     padding: var(--space-2) var(--space-4);
-     background-color: var(--color-primary);
-     color: #fff;
-     font-weight: var(--font-medium);
-     border-radius: var(--radius-md);
-     border: none;
-     cursor: pointer;
-     transition: opacity var(--transition-fast);
-   }
-
-   .btn:hover {
-     opacity: 0.85;
-   }
+   BUTTONS
    ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: background-color var(--transition-fast);
+}
+
+.btn:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+
+/* ------------------------------------------------------------
+   FORMS
+   ------------------------------------------------------------ */
+
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+.form-label {
+  display: block;
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-family: inherit;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+
+/* ------------------------------------------------------------
+   POST LIST
+   ------------------------------------------------------------ */
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.post-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.post-item-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.post-item-title:hover {
+  color: var(--color-primary);
+}
+
+.post-meta {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+
+/* ------------------------------------------------------------
+   POST BODY
+   ------------------------------------------------------------ */
+
+.post-body {
+  font-size: var(--text-lg);
+  line-height: 1.75;
+}
+
+
+/* ------------------------------------------------------------
+   NAVIGATION
+   ------------------------------------------------------------ */
+
+.back-link {
+  display: inline-block;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  margin-bottom: var(--space-5);
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-text);
+}
+
+
+/* ------------------------------------------------------------
+   ALERTS
+   ------------------------------------------------------------ */
+
+.alert-danger {
+  list-style: none;
+  padding: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-5);
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+}
